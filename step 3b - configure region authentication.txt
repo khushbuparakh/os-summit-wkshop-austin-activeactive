@@ -22,13 +22,13 @@ cd /opt/openstack-ansible/playbooks
 
 ## Glance
 
-ansible glance_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://<admin region IP>:35357+' /etc/glance/glance-api.conf"
-ansible glance_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://<admin region IP>:35357+' /etc/glance/glance-registry.conf"
+ansible glance_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://172.32.238.95:35357+' /etc/glance/glance-api.conf"
+ansible glance_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://172.32.238.95:35357+' /etc/glance/glance-registry.conf"
 
-ansible glance_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:5000/v3+auth_url = http://<admin region IP>:5000/v3+' /etc/glance/glance-cache.conf"
+ansible glance_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:5000/v3+auth_url = http://172.32.238.95:5000/v3+' /etc/glance/glance-cache.conf"
 
-ansible glance_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://<admin region IP>:5000+' /etc/glance/glance-api.conf"
-ansible glance_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://<admin region IP>:5000+' /etc/glance/glance-registry.conf"
+ansible glance_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://172.32.238.95:5000+' /etc/glance/glance-api.conf"
+ansible glance_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http:/172.32.238.95:5000+' /etc/glance/glance-registry.conf"
 
 ansible glance_container -m shell -a "service glance-api restart"
 ansible glance_container -m shell -a "service glance-registry restart"
