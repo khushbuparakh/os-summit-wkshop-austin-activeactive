@@ -68,19 +68,19 @@ ansible nova_scheduler_container -m shell -a "service nova-scheduler restart"
 ansible compute_hosts -m shell -a "service nova-compute restart"
 
 ## Neutron
-ansible neutron_server_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://<admin region IP>:35357+' /etc/neutron/neutron.conf"
-ansible neutron_server_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://<admin region IP>:5000+' /etc/neutron/neutron.conf"
+ansible neutron_server_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://172.32.238.95:35357+' /etc/neutron/neutron.conf"
+ansible neutron_server_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://172.32.238.95:5000+' /etc/neutron/neutron.conf"
 
 ansible neutron_server_container -m shell -a "service neutron-server restart"
 
 ## Heat
-ansible heat_apis_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://<admin region IP>:5000+' /etc/heat/heat.conf"
-ansible heat_apis_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000/v3+auth_uri = http://<admin region IP>:5000/v3+' /etc/heat/heat.conf"
-ansible heat_apis_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://<admin region IP>:35357+' /etc/heat/heat.conf"
+ansible heat_apis_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http:/172.32.238.95:5000+' /etc/heat/heat.conf"
+ansible heat_apis_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000/v3+auth_uri = http://172.32.238.95:5000/v3+' /etc/heat/heat.conf"
+ansible heat_apis_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://172.32.238.95:35357+' /etc/heat/heat.conf"
 
-ansible heat_engine_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://<admin region IP>:5000+' /etc/heat/heat.conf"
-ansible heat_engine_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000/v3+auth_uri = http://<admin region IP>:5000/v3+' /etc/heat/heat.conf"
-ansible heat_engine_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://<admin region IP>:35357+' /etc/heat/heat.conf"
+ansible heat_engine_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000+auth_uri = http://172.32.238.95:5000+' /etc/heat/heat.conf"
+ansible heat_engine_container -m shell -a "sed -i 's+^auth_uri = http://172.31.238.2:5000/v3+auth_uri = http://172.32.238.95:5000/v3+' /etc/heat/heat.conf"
+ansible heat_engine_container -m shell -a "sed -i 's+^auth_url = http://172.31.238.2:35357+auth_url = http://172.32.238.95:35357+' /etc/heat/heat.conf"
 
 ansible heat_apis_container -m shell -a "service heat-api restart"
 ansible heat_engine_container -m shell -a "service heat-engine restart"
